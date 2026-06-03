@@ -4,6 +4,8 @@ This repository contains a reusable **Terraform/OpenTofu module** and progressiv
 
 It is part of the **[FoggyKitchen.com training ecosystem](https://foggykitchen.com/courses-2/)** and is designed to compose cleanly with modules such as **`terraform-oci-fk-devops-pipeline`**, **`terraform-oci-fk-oke`**, **`terraform-oci-fk-ocir`**, and **`terraform-oci-fk-logging`**.
 
+Support expectations are documented in [SUPPORT.md](SUPPORT.md).
+
 ---
 
 ## Purpose
