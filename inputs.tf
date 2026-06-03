@@ -102,14 +102,14 @@ variable "deploy_artifacts" {
     argument_substitution_mode = optional(string, "NONE")
     deploy_artifact_type       = string
     source = object({
-      type                         = string
-      image_uri                    = optional(string)
-      image_digest                 = optional(string)
-      repository_key               = optional(string)
-      chart_url                    = optional(string)
-      deploy_artifact_version      = optional(string)
-      base64encoded_content        = optional(string)
-      deploy_artifact_path         = optional(string)
+      type                    = string
+      image_uri               = optional(string)
+      image_digest            = optional(string)
+      repository_key          = optional(string)
+      chart_url               = optional(string)
+      deploy_artifact_version = optional(string)
+      base64encoded_content   = optional(string)
+      deploy_artifact_path    = optional(string)
     })
   }))
   default = {}

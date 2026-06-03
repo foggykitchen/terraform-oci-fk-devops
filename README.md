@@ -15,7 +15,7 @@ The goal of this module is to provide a **clean reusable core** for OCI DevOps:
 - mirrored source repositories
 - deploy artifacts
 - deploy environments
-- repository triggers
+- optional repository triggers for externally supplied build pipeline IDs
 
 This module intentionally does **not** model the detailed build or deploy stage graph. That concern belongs in **`terraform-oci-fk-devops-pipeline`**.
 
@@ -32,7 +32,7 @@ The module creates:
 - mirrored DevOps repositories
 - deploy artifacts
 - OKE deploy environments
-- DevOps triggers
+- DevOps triggers when the target build pipeline ID is supplied by the caller
 
 The module intentionally does **not** create:
 
@@ -138,7 +138,7 @@ module "fk_devops" {
 | `repositories` | `map(object)` | no | Mirrored DevOps repositories |
 | `deploy_artifacts` | `map(object)` | no | OCI DevOps deploy artifacts such as Docker images, Helm charts, and generic files |
 | `deploy_environments` | `map(object)` | no | OCI DevOps deploy environments, currently focused on OKE cluster environments |
-| `triggers` | `map(object)` | no | Repository triggers that launch build pipelines |
+| `triggers` | `map(object)` | no | Repository triggers that launch externally supplied build pipeline IDs |
 
 ---
 
@@ -155,6 +155,7 @@ module "fk_devops" {
 | `deploy_artifact_ids` | Map of deploy artifact OCIDs |
 | `deploy_environment_ids` | Map of deploy environment OCIDs |
 | `trigger_ids` | Map of trigger OCIDs |
+| `trigger_urls` | Map of trigger URLs |
 
 ---
 
@@ -171,6 +172,8 @@ A typical OCI DevOps composition looks like this:
 4. Orchestrate the full workflow in a lesson, blueprint, or landing zone composition
 
 This keeps the long-lived control-plane resources separate from the faster-changing delivery logic.
+
+When the build pipeline is created by `terraform-oci-fk-devops-pipeline`, define the trigger in that pipeline module instead. This avoids passing pipeline IDs back into the control-plane module and keeps trigger ownership next to the pipeline graph it starts.
 
 ---
 

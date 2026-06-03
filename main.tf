@@ -99,14 +99,14 @@ resource "oci_devops_deploy_artifact" "this" {
   argument_substitution_mode = each.value.argument_substitution_mode
 
   deploy_artifact_source {
-    deploy_artifact_source_type  = each.value.source.type
-    image_uri                    = each.value.source.image_uri
-    image_digest                 = each.value.source.image_digest
-    repository_id                = each.value.source.repository_key == null ? null : oci_devops_repository.this[each.value.source.repository_key].id
-    chart_url                    = each.value.source.chart_url
-    deploy_artifact_version      = each.value.source.deploy_artifact_version
-    base64encoded_content        = each.value.source.base64encoded_content
-    deploy_artifact_path         = each.value.source.deploy_artifact_path
+    deploy_artifact_source_type = each.value.source.type
+    image_uri                   = each.value.source.image_uri
+    image_digest                = each.value.source.image_digest
+    repository_id               = each.value.source.repository_key == null ? null : oci_devops_repository.this[each.value.source.repository_key].id
+    chart_url                   = each.value.source.chart_url
+    deploy_artifact_version     = each.value.source.deploy_artifact_version
+    base64encoded_content       = each.value.source.base64encoded_content
+    deploy_artifact_path        = each.value.source.deploy_artifact_path
   }
 }
 

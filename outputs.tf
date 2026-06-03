@@ -48,6 +48,11 @@ output "trigger_ids" {
   value       = { for key, trigger in oci_devops_trigger.this : key => trigger.id }
 }
 
+output "trigger_urls" {
+  description = "Map of DevOps trigger URLs keyed by logical name."
+  value       = { for key, trigger in oci_devops_trigger.this : key => trigger.trigger_url }
+}
+
 output "project" {
   description = "Structured summary of the DevOps project and attached companion resources."
   value = {
