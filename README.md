@@ -37,7 +37,7 @@ The module creates:
 - DevOps external connections
 - mirrored DevOps repositories
 - deploy artifacts
-- OKE deploy environments
+- OKE and Functions deploy environments
 - DevOps triggers when the target build pipeline ID is supplied by the caller
 
 The module intentionally does **not** create:
@@ -143,8 +143,10 @@ module "fk_devops" {
 | `connections` | `map(object)` | no | DevOps external connections such as GitHub access-token connectors |
 | `repositories` | `map(object)` | no | Mirrored DevOps repositories |
 | `deploy_artifacts` | `map(object)` | no | OCI DevOps deploy artifacts such as Docker images, Helm charts, and generic files |
-| `deploy_environments` | `map(object)` | no | OCI DevOps deploy environments, currently focused on OKE cluster environments |
+| `deploy_environments` | `map(object)` | no | OCI DevOps deploy environments for OKE clusters and OCI Functions |
 | `triggers` | `map(object)` | no | Repository triggers that launch externally supplied build pipeline IDs |
+
+For `deploy_environments`, set `deploy_environment_type = "OKE_CLUSTER"` with `cluster_id` for Kubernetes deployments, or `deploy_environment_type = "FUNCTION"` with `function_id` for function deployment or function invocation stages.
 
 ---
 

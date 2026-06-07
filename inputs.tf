@@ -121,7 +121,8 @@ variable "deploy_environments" {
     display_name            = string
     description             = optional(string)
     deploy_environment_type = optional(string, "OKE_CLUSTER")
-    cluster_id              = string
+    cluster_id              = optional(string)
+    function_id             = optional(string)
   }))
   default = {}
 }

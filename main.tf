@@ -117,7 +117,8 @@ resource "oci_devops_deploy_environment" "this" {
   display_name            = each.value.display_name
   description             = coalesce(each.value.description, each.value.display_name)
   deploy_environment_type = each.value.deploy_environment_type
-  cluster_id              = each.value.cluster_id
+  cluster_id              = each.value.deploy_environment_type == "OKE_CLUSTER" ? try(each.value.cluster_id, null) : null
+  function_id             = each.value.deploy_environment_type == "FUNCTION" ? try(each.value.function_id, null) : null
 }
 
 resource "oci_devops_trigger" "this" {
