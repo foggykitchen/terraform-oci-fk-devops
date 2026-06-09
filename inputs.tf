@@ -123,6 +123,17 @@ variable "deploy_environments" {
     deploy_environment_type = optional(string, "OKE_CLUSTER")
     cluster_id              = optional(string)
     function_id             = optional(string)
+    compute_instance_group_selectors = optional(list(object({
+      compute_instance_ids = optional(list(string))
+      query                = optional(string)
+      region               = optional(string)
+      selector_type        = string
+    })), [])
+    network_channel = optional(object({
+      network_channel_type = string
+      subnet_id            = string
+      nsg_ids              = optional(list(string))
+    }))
   }))
   default = {}
 }

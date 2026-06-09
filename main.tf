@@ -119,6 +119,30 @@ resource "oci_devops_deploy_environment" "this" {
   deploy_environment_type = each.value.deploy_environment_type
   cluster_id              = each.value.deploy_environment_type == "OKE_CLUSTER" ? try(each.value.cluster_id, null) : null
   function_id             = each.value.deploy_environment_type == "FUNCTION" ? try(each.value.function_id, null) : null
+
+  dynamic "compute_instance_group_selectors" {
+    for_each = each.value.deploy_environment_type == "COMPUTE_INSTANCE_GROUP" && length(try(each.value.compute_instance_group_selectors, [])) > 0 ? [each.value.compute_instance_group_selectors] : []
+    content {
+      dynamic "items" {
+        for_each = compute_instance_group_selectors.value
+        content {
+          compute_instance_ids = try(items.value.compute_instance_ids, null)
+          query                = try(items.value.query, null)
+          region               = try(items.value.region, null)
+          selector_type        = items.value.selector_type
+        }
+      }
+    }
+  }
+
+  dynamic "network_channel" {
+    for_each = each.value.deploy_environment_type == "COMPUTE_INSTANCE_GROUP" && try(each.value.network_channel, null) != null ? [each.value.network_channel] : []
+    content {
+      network_channel_type = network_channel.value.network_channel_type
+      subnet_id            = network_channel.value.subnet_id
+      nsg_ids              = try(network_channel.value.nsg_ids, null)
+    }
+  }
 }
 
 resource "oci_devops_trigger" "this" {
