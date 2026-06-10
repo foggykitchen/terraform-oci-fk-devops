@@ -148,6 +148,8 @@ module "fk_devops" {
 
 For `deploy_environments`, set `deploy_environment_type = "OKE_CLUSTER"` with `cluster_id` for Kubernetes deployments, `deploy_environment_type = "FUNCTION"` with `function_id` for function deployment or function invocation stages, or `deploy_environment_type = "COMPUTE_INSTANCE_GROUP"` with `compute_instance_group_selectors` and `network_channel` for compute instance group deployments.
 
+For `deploy_artifacts.source`, use `repository_key` when the artifact source should reference a mirrored OCI DevOps repository created by this module. Use `repository_id` when the artifact source should reference an externally managed repository, such as an OCI Artifact Registry generic repository created by `terraform-oci-fk-artifact-registry`.
+
 ---
 
 ## Module Outputs

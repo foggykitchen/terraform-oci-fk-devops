@@ -106,6 +106,7 @@ variable "deploy_artifacts" {
       image_uri               = optional(string)
       image_digest            = optional(string)
       repository_key          = optional(string)
+      repository_id           = optional(string)
       chart_url               = optional(string)
       deploy_artifact_version = optional(string)
       base64encoded_content   = optional(string)
