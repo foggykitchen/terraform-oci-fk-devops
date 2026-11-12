@@ -1,5 +1,6 @@
 module "fk_devops" {
-  source = "../.."
+  create_notification_topic = true
+  source                    = "../.."
 
   compartment_ocid = var.compartment_ocid
   project_name     = var.project_name
